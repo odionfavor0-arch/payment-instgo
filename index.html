@@ -123,14 +123,16 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:var(--blue)
 <div class="header">
 <div class="header-inner">
   <div class="logo-wrap">
-    <!-- Heart/plane SVG only - no background, just the mark -->
-    <svg class="logo-heart" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Heart shape -->
-      <path d="M50 85 C50 85 10 58 10 32 C10 20 20 12 32 12 C40 12 47 16 50 22 C53 16 60 12 68 12 C80 12 90 20 90 32 C90 58 50 85 50 85Z" fill="#ca6ce5"/>
-      <!-- Plane silhouette inside heart -->
-      <path d="M28 42 L52 50 L28 58 V52 L42 50 L28 46 V42Z" fill="#001f4d"/>
-      <path d="M52 50 L68 44 L70 50 L68 56 L52 50Z" fill="#001f4d" opacity="0.7"/>
-      <path d="M46 57 L52 55 L58 57 L52 63Z" fill="#001f4d" opacity="0.5"/>
+    <!-- Heart/plane SVG - matches actual InstaGo logo -->
+    <svg class="logo-heart" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left lobe of heart -->
+      <path d="M60 105 C60 105 8 70 8 36 C8 20 20 10 35 10 C45 10 54 15 60 24 C66 15 75 10 85 10 C100 10 112 20 112 36 C112 70 60 105 60 105Z" fill="#ca6ce5"/>
+      <!-- Plane body -->
+      <path d="M32 52 L62 62 L32 72 V65 L50 62 L32 57 V52Z" fill="#004aad"/>
+      <!-- Plane wings -->
+      <path d="M62 62 L80 55 L82 62 L80 69 L62 62Z" fill="#004aad" opacity="0.85"/>
+      <!-- Plane tail -->
+      <path d="M54 70 L62 67 L70 70 L62 78Z" fill="#004aad" opacity="0.65"/>
     </svg>
     <div class="logo-text">
       <div class="logo-name">Insta<span>Go</span></div>
@@ -322,7 +324,7 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:var(--blue)
   <p>Thank you! We have received your confirmation and our team is verifying your payment now. You will hear from us within 1 to 2 hours.</p>
   <div class="success-contact">
     Questions? Reach us at<br>
-    <a href="mailto:info@instagoedtravels.com">info@instagoedtravels.com</a><br>
+    <a href="/cdn-cgi/l/email-protection#c5acaba3aa85acabb6b1a4a2aaa0a1b1b7a4b3a0a9b6eba6aaa8"><span class="__cf_email__" data-cfemail="355c5b535a755c5b464154525a5051414754435059461b565a58">[email&#160;protected]</span></a><br>
     +372 53539474
   </div>
 </div>
@@ -332,14 +334,14 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:var(--blue)
   <div class="footer-brand">Insta<span>Go</span></div>
   <p>
     <a href="https://instagoedtravels.com">instagoedtravels.com</a> &middot;
-    info@instagoedtravels.com &middot; +372 53539474<br>
+    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066f686069466f687572676169636272746770636a752865696b">[email&#160;protected]</a> &middot; +372 53539474<br>
     Kadaka Tee 137, Tallinn, Estonia
   </p>
 </div>
 
 </div><!-- /page-wrap -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function doCopy(text, btnId, originalLabel) {
   var btn = document.getElementById(btnId);
   function showCopied() {
@@ -377,18 +379,4 @@ function showFileName(input) {
   }
 }
 
-function submitForm(e) {
-  e.preventDefault();
-  var btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Submitting...';
-  setTimeout(function() {
-    document.getElementById('main-content').style.display = 'none';
-    document.getElementById('success-screen').style.display = 'block';
-    window.scrollTo(0, 0);
-  }, 1000);
-}
-</script>
-
-</body>
-</html>
+function
