@@ -23,14 +23,12 @@
 body { font-family:'Lato',sans-serif; background:var(--off-white); color:var(--text-dark); line-height:1.6; }
 .page-wrap { max-width:680px; margin:0 auto; background:#fff; min-height:100vh; box-shadow:0 0 60px rgba(0,74,173,0.12); }
 
-/* HEADER */
 .header { background:linear-gradient(135deg,#001f4d 0%,#004aad 60%,#1a6dd4 100%); position:relative; overflow:hidden; }
 .header::before { content:''; position:absolute; top:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:#ca6ce5; opacity:0.15; }
 .header::after { content:''; position:absolute; bottom:-40px; left:-40px; width:160px; height:160px; border-radius:50%; background:#ca6ce5; opacity:0.1; }
 .header-inner { position:relative; z-index:2; padding:36px 28px 32px; text-align:center; }
+
 .logo-wrap { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:20px; }
-.logo-heart { width:52px; height:52px; }
-.logo-text { text-align:left; }
 .logo-name { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:900; color:#fff; letter-spacing:-0.5px; line-height:1; }
 .logo-name span { color:#ca6ce5; }
 .logo-sub { font-size:9px; color:rgba(255,255,255,0.5); letter-spacing:2.5px; text-transform:uppercase; margin-top:3px; display:block; }
@@ -41,7 +39,6 @@ body { font-family:'Lato',sans-serif; background:var(--off-white); color:var(--t
 .step-pill.active { background:#ca6ce5; border-color:#ca6ce5; color:#fff; }
 .accent-rule { height:4px; background:linear-gradient(90deg,#004aad,#ca6ce5,#004aad); }
 
-/* SECTION */
 .section { padding:28px; }
 .section + .section { border-top:1px solid var(--border); }
 .form-section { padding:28px; background:var(--off-white); }
@@ -50,7 +47,6 @@ body { font-family:'Lato',sans-serif; background:var(--off-white); color:var(--t
 .step-badge.purple { background:var(--purple); }
 .section-label h2 { font-family:'Montserrat',sans-serif; font-size:15px; font-weight:800; color:var(--text-dark); text-transform:uppercase; letter-spacing:0.5px; }
 
-/* PAYMENT CARDS */
 .payment-card { border:1.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; }
 .pcard-head { padding:13px 18px; display:flex; align-items:center; gap:10px; }
 .pcard-head.naira { background:linear-gradient(90deg,#001f4d,#004aad); }
@@ -63,43 +59,44 @@ body { font-family:'Lato',sans-serif; background:var(--off-white); color:var(--t
 .drow:last-of-type { border-bottom:none; }
 .dlabel { width:125px; flex-shrink:0; color:var(--text-light); font-size:13px; }
 .dvalue { color:var(--text-dark); font-weight:600; flex:1; }
-.copy-btn { display:inline-flex; align-items:center; gap:6px; background:var(--blue); color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; margin-top:12px; transition:background 0.2s; }
-.copy-btn:hover { background:var(--blue-dark); }
+
+.copy-btn { display:inline-flex; align-items:center; gap:6px; background:#004aad; color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; margin-top:12px; transition:background 0.2s; }
+.copy-btn:hover { background:#003380; }
+
 .or-divider { display:flex; align-items:center; gap:10px; margin:6px 0; color:var(--text-light); font-size:13px; font-weight:600; }
 .or-divider::before,.or-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+
 .stripe-btn { display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#5b21b6,#ca6ce5); color:#fff; padding:14px 24px; border-radius:10px; text-decoration:none; font-family:'Montserrat',sans-serif; font-weight:800; font-size:14px; transition:opacity 0.2s; }
 .stripe-btn:hover { opacity:0.9; }
 .stripe-note { font-size:12px; color:var(--text-light); text-align:center; margin-top:8px; }
 .narration-note { background:#fff8e6; border-left:3px solid #f59e0b; border-radius:0 8px 8px 0; padding:12px 14px; font-size:13px; color:#92400e; margin-top:14px; line-height:1.6; }
 
-/* FORM */
 .form-card { background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 20px rgba(0,74,173,0.07); }
 .form-intro { font-size:14px; color:var(--text-mid); margin-bottom:22px; line-height:1.7; }
 .form-group { margin-bottom:18px; }
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 label { display:block; margin-bottom:6px; font-weight:700; font-size:13px; color:var(--text-dark); }
-.req { color:var(--purple); }
-input,select,textarea { width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'Lato',sans-serif; color:var(--text-dark); background:#fff; transition:border-color 0.2s,box-shadow 0.2s; }
-input:focus,select:focus,textarea:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(0,74,173,0.1); }
-.file-wrap { border:2px dashed var(--border); border-radius:8px; padding:18px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; }
-.file-wrap:hover { border-color:var(--blue); background:#f0f5ff; }
-.file-wrap .upload-icon { font-size:26px; margin-bottom:6px; }
-.file-wrap p { font-size:13px; color:var(--text-light); }
-.file-hidden { display:none; }
-.submit-btn { width:100%; background:linear-gradient(135deg,#004aad,#1a6dd4); color:#fff; border:none; padding:16px; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:15px; font-weight:800; cursor:pointer; letter-spacing:0.5px; box-shadow:0 4px 20px rgba(0,74,173,0.3); transition:opacity 0.2s; }
+.req { color:#ca6ce5; }
+input,select,textarea { width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'Lato',sans-serif; color:var(--text-dark); background:#fff; transition:border-color 0.2s,box-shadow 0.2s; -webkit-appearance:none; appearance:none; }
+input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; box-shadow:0 0 0 3px rgba(0,74,173,0.1); }
+
+.file-wrap { border:2px dashed var(--border); border-radius:8px; padding:20px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; background:#fff; }
+.file-wrap:hover { border-color:#004aad; background:#f0f5ff; }
+.upload-icon { font-size:28px; margin-bottom:6px; display:block; }
+.file-wrap p { font-size:13px; color:var(--text-light); margin:0; }
+
+.submit-btn { width:100%; background:linear-gradient(135deg,#a84ec7,#ca6ce5); color:#fff; border:none; padding:16px; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:15px; font-weight:800; cursor:pointer; letter-spacing:0.5px; box-shadow:0 4px 20px rgba(202,108,229,0.4); transition:opacity 0.2s; margin-top:4px; }
 .submit-btn:hover { opacity:0.9; }
 .submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
 .terms-note { font-size:12px; color:var(--text-light); text-align:center; margin-top:10px; line-height:1.6; }
 
-/* SUCCESS */
 .success-screen { display:none; padding:48px 28px; text-align:center; }
-.success-icon { width:70px; height:70px; border-radius:50%; background:linear-gradient(135deg,#004aad,#ca6ce5); display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:30px; color:#fff; font-weight:900; }
+.success-icon { width:70px; height:70px; border-radius:50%; background:linear-gradient(135deg,#004aad,#ca6ce5); display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:36px; color:#fff; font-weight:900; }
 .success-screen h2 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:900; color:var(--text-dark); margin-bottom:12px; }
 .success-screen p { font-size:15px; color:var(--text-mid); line-height:1.8; max-width:380px; margin:0 auto 20px; }
 .success-contact { background:var(--off-white); border-radius:12px; padding:18px 24px; font-size:14px; color:var(--text-mid); line-height:1.9; display:inline-block; }
-.success-contact a { color:var(--blue); text-decoration:none; font-weight:700; }
+.success-contact a { color:#004aad; text-decoration:none; font-weight:700; }
 
-/* FOOTER */
 .footer { background:#001f4d; padding:22px 28px; text-align:center; }
 .footer-brand { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:900; color:#fff; margin-bottom:6px; }
 .footer-brand span { color:#ca6ce5; }
@@ -119,264 +116,283 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:var(--blue)
 <body>
 <div class="page-wrap">
 
-<!-- HEADER -->
 <div class="header">
-<div class="header-inner">
-  <div class="logo-wrap">
-    <!-- Heart/plane SVG - matches actual InstaGo logo -->
-    <svg class="logo-heart" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Left lobe of heart -->
-      <path d="M60 105 C60 105 8 70 8 36 C8 20 20 10 35 10 C45 10 54 15 60 24 C66 15 75 10 85 10 C100 10 112 20 112 36 C112 70 60 105 60 105Z" fill="#ca6ce5"/>
-      <!-- Plane body -->
-      <path d="M32 52 L62 62 L32 72 V65 L50 62 L32 57 V52Z" fill="#004aad"/>
-      <!-- Plane wings -->
-      <path d="M62 62 L80 55 L82 62 L80 69 L62 62Z" fill="#004aad" opacity="0.85"/>
-      <!-- Plane tail -->
-      <path d="M54 70 L62 67 L70 70 L62 78Z" fill="#004aad" opacity="0.65"/>
-    </svg>
-    <div class="logo-text">
-      <div class="logo-name">Insta<span>Go</span></div>
-      <span class="logo-sub">Ed-Travels &amp; Tours</span>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 50 C28 50 4 35 4 20 C4 12 10 6 18 6 C22.5 6 26.5 8.5 28 13 C29.5 8.5 33.5 6 38 6 C46 6 52 12 52 20 C52 35 28 50 28 50Z" fill="#ca6ce5"/>
+        <path d="M16 24 L30 29 L16 34 V30 L24 29 L16 26 V24Z" fill="#004aad"/>
+        <path d="M30 29 L40 25 L41 29 L40 33 L30 29Z" fill="#004aad" opacity="0.8"/>
+        <path d="M26 33 L30 31.5 L34 33 L30 38Z" fill="#004aad" opacity="0.6"/>
+      </svg>
+      <div>
+        <div class="logo-name">Insta<span>Go</span></div>
+        <span class="logo-sub">Ed-Travels &amp; Tours</span>
+      </div>
+    </div>
+    <h1>Complete Your Payment</h1>
+    <p>Follow the two steps below to secure your booking and get started.</p>
+    <div class="step-pills">
+      <div class="step-pill active">Step 1 — Make Payment</div>
+      <div class="step-pill active">Step 2 — Confirm Below</div>
     </div>
   </div>
-  <h1>Complete Your Payment</h1>
-  <p>Follow the two steps below to secure your booking and get started.</p>
-  <div class="step-pills">
-    <div class="step-pill active">Step 1 — Make Payment</div>
-    <div class="step-pill active">Step 2 — Confirm Below</div>
-  </div>
-</div>
 </div>
 <div class="accent-rule"></div>
 
-<!-- MAIN CONTENT -->
 <div id="main-content">
 
-<!-- STEP 1 -->
-<div class="section">
-  <div class="section-label">
-    <div class="step-badge">1</div>
-    <h2>Make Your Payment</h2>
-  </div>
-
-  <!-- Naira -->
-  <div class="payment-card">
-    <div class="pcard-head naira">
-      <span class="flag">🇳🇬</span>
-      <h3>Nigerian Naira Transfer</h3>
+  <div class="section">
+    <div class="section-label">
+      <div class="step-badge">1</div>
+      <h2>Make Your Payment</h2>
     </div>
-    <div class="pcard-body">
-      <div class="drow"><span class="dlabel">Bank</span><span class="dvalue">Moniepoint Microfinance Bank</span></div>
-      <div class="drow"><span class="dlabel">Account Name</span><span class="dvalue">InstaGo Ed Travels</span></div>
-      <div class="drow"><span class="dlabel">Account No.</span><span class="dvalue" id="naira-num">9160219459</span></div>
-      <div class="drow"><span class="dlabel">Exchange Rate</span><span class="dvalue">₦1,750 = €1 (subject to change)</span></div>
-      <button class="copy-btn" id="btn-naira" onclick="doCopy('9160219459','btn-naira','Copy Account Number')">Copy Account Number</button>
-    </div>
-  </div>
 
-  <div class="or-divider">OR</div>
-
-  <!-- Euro -->
-  <div class="payment-card">
-    <div class="pcard-head euro">
-      <span class="flag">🇪🇺</span>
-      <h3>Euro Bank Transfer (WISE)</h3>
-    </div>
-    <div class="pcard-body">
-      <div class="drow"><span class="dlabel">Account Name</span><span class="dvalue">INSTAGO ED TRAVEL &amp; TOURS OÜ</span></div>
-      <div class="drow"><span class="dlabel">IBAN</span><span class="dvalue" id="iban-num">BE14 9674 1821 7583</span></div>
-      <div class="drow"><span class="dlabel">BIC</span><span class="dvalue">TRWIBEB1XXX</span></div>
-      <div class="drow"><span class="dlabel">Address</span><span class="dvalue">Rue du Trône 100, 3rd Floor, 1050 Brussels, Belgium</span></div>
-      <button class="copy-btn" id="btn-iban" onclick="doCopy('BE14967418217583','btn-iban','Copy IBAN')">Copy IBAN</button>
-    </div>
-  </div>
-
-  <div class="or-divider">OR</div>
-
-  <!-- Card -->
-  <div class="payment-card">
-    <div class="pcard-head card">
-      <span class="flag">💳</span>
-      <h3>Pay by Card (International)</h3>
-    </div>
-    <div class="pcard-body">
-      <p style="font-size:14px;color:#4a5568;margin-bottom:14px;">Pay securely online using any debit or credit card.</p>
-      <a href="https://buy.stripe.com/fZe9Bm2eB0JE3a87sE" class="stripe-btn" target="_blank">Pay Securely with Card &rarr;</a>
-      <p class="stripe-note">Secured by Stripe &middot; 256-bit encryption</p>
-    </div>
-  </div>
-
-  <div class="narration-note">
-    <strong>Important:</strong> Please include your full name and invoice number as the payment narration for documentation and tax purposes.
-  </div>
-</div>
-
-<!-- STEP 2 -->
-<div class="form-section">
-  <div class="section-label">
-    <div class="step-badge purple">2</div>
-    <h2>Confirm Your Payment</h2>
-  </div>
-  <div class="form-card">
-    <p class="form-intro">After making your payment, fill in the details below and upload your receipt. Our team will verify and confirm within 1 to 2 hours.</p>
-
-    <form id="pay-form" onsubmit="submitForm(event)">
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Full Name <span class="req">*</span></label>
-          <input type="text" name="name" placeholder="As on your passport" required>
-        </div>
-        <div class="form-group">
-          <label>Email Address <span class="req">*</span></label>
-          <input type="email" name="email" placeholder="your@email.com" required>
-        </div>
+    <div class="payment-card">
+      <div class="pcard-head naira">
+        <span class="flag">🇳🇬</span>
+        <h3>Nigerian Naira Transfer</h3>
       </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Phone Number <span class="req">*</span></label>
-          <input type="tel" name="phone" placeholder="+234 000 0000 000" required>
-        </div>
-        <div class="form-group">
-          <label>Invoice Number</label>
-          <input type="text" name="invoice" placeholder="e.g. INS-2607007">
-        </div>
+      <div class="pcard-body">
+        <div class="drow"><span class="dlabel">Bank</span><span class="dvalue">Moniepoint Microfinance Bank</span></div>
+        <div class="drow"><span class="dlabel">Account Name</span><span class="dvalue">InstaGo Ed Travels</span></div>
+        <div class="drow"><span class="dlabel">Account No.</span><span class="dvalue">9160219459</span></div>
+        <div class="drow"><span class="dlabel">Exchange Rate</span><span class="dvalue">&#8358;1,750 = &euro;1 (subject to change)</span></div>
+        <button class="copy-btn" id="btn1">Copy Account Number</button>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label>Service Type <span class="req">*</span></label>
-        <select name="service" required>
-          <option value="">Select service...</option>
-          <optgroup label="Study Abroad">
-            <option>Study in China</option>
-            <option>Study in Malta</option>
-            <option>Study in Europe (Other)</option>
-            <option>Scholarship Application Support</option>
-          </optgroup>
-          <optgroup label="Tourism &amp; Travel">
-            <option>Tourism - General Travel</option>
-            <option>Schengen Visa Processing</option>
-            <option>Airport Pickup &amp; Drop-Off</option>
-            <option>Hotel &amp; Accommodation Booking</option>
-            <option>Flight Booking</option>
-            <option>Travel Insurance</option>
-            <option>Full Logistics Package</option>
-          </optgroup>
-          <optgroup label="Visa Services">
-            <option>Visa Assessment</option>
-            <option>Digital Nomad Visa</option>
-            <option>Permanent Residency</option>
-            <option>Citizenship Application</option>
-            <option>Relocation Pathway</option>
-          </optgroup>
-        </select>
+    <div class="or-divider">OR</div>
+
+    <div class="payment-card">
+      <div class="pcard-head euro">
+        <span class="flag">🇪🇺</span>
+        <h3>Euro Bank Transfer (WISE)</h3>
       </div>
+      <div class="pcard-body">
+        <div class="drow"><span class="dlabel">Account Name</span><span class="dvalue">INSTAGO ED TRAVEL &amp; TOURS O&Uuml;</span></div>
+        <div class="drow"><span class="dlabel">IBAN</span><span class="dvalue">BE14 9674 1821 7583</span></div>
+        <div class="drow"><span class="dlabel">BIC</span><span class="dvalue">TRWIBEB1XXX</span></div>
+        <div class="drow"><span class="dlabel">Address</span><span class="dvalue">Rue du Tr&ocirc;ne 100, 3rd Floor, 1050 Brussels, Belgium</span></div>
+        <button class="copy-btn" id="btn2">Copy IBAN</button>
+      </div>
+    </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label>Amount Paid <span class="req">*</span></label>
-          <input type="text" name="amount" placeholder="e.g. ₦500,000 or €500" required>
+    <div class="or-divider">OR</div>
+
+    <div class="payment-card">
+      <div class="pcard-head card">
+        <span class="flag">💳</span>
+        <h3>Pay by Card (International)</h3>
+      </div>
+      <div class="pcard-body">
+        <p style="font-size:14px;color:#4a5568;margin-bottom:14px;">Pay securely online using any debit or credit card.</p>
+        <a href="https://buy.stripe.com/fZe9Bm2eB0JE3a87sE" class="stripe-btn" target="_blank">Pay Securely with Card &rarr;</a>
+        <p class="stripe-note">Secured by Stripe &middot; 256-bit encryption</p>
+      </div>
+    </div>
+
+    <div class="narration-note">
+      <strong>Important:</strong> Please include your full name and invoice number as the payment narration for documentation purposes.
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-label">
+      <div class="step-badge purple">2</div>
+      <h2>Confirm Your Payment</h2>
+    </div>
+    <div class="form-card">
+      <p class="form-intro">After making your payment, fill in the details below and upload your receipt. Our team will verify and confirm within 1 to 2 hours.</p>
+
+      <form id="pay-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="f-name" placeholder="As on your passport" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address <span class="req">*</span></label>
+            <input type="email" id="f-email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number <span class="req">*</span></label>
+            <input type="tel" id="f-phone" placeholder="+234 000 0000 000" required>
+          </div>
+          <div class="form-group">
+            <label>Invoice Number</label>
+            <input type="text" id="f-invoice" placeholder="e.g. INS-2607007">
+          </div>
         </div>
         <div class="form-group">
-          <label>Payment Method <span class="req">*</span></label>
-          <select name="method" required>
-            <option value="">Select...</option>
-            <option>Naira Bank Transfer</option>
-            <option>Euro WISE Transfer</option>
-            <option>Stripe Card</option>
+          <label>Service Type <span class="req">*</span></label>
+          <select id="f-service" required>
+            <option value="">Select service...</option>
+            <optgroup label="Study Abroad">
+              <option>Study in China</option>
+              <option>Study in Malta</option>
+              <option>Study in Europe (Other)</option>
+              <option>Scholarship Application Support</option>
+            </optgroup>
+            <optgroup label="Tourism &amp; Travel">
+              <option>Tourism - General Travel</option>
+              <option>Schengen Visa Processing</option>
+              <option>Airport Pickup &amp; Drop-Off</option>
+              <option>Hotel &amp; Accommodation Booking</option>
+              <option>Flight Booking</option>
+              <option>Travel Insurance</option>
+              <option>Full Logistics Package</option>
+            </optgroup>
+            <optgroup label="Visa Services">
+              <option>Visa Assessment</option>
+              <option>Digital Nomad Visa</option>
+              <option>Permanent Residency</option>
+              <option>Citizenship Application</option>
+              <option>Relocation Pathway</option>
+            </optgroup>
           </select>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label>Payment Date <span class="req">*</span></label>
-        <input type="date" name="date" required>
-      </div>
-
-      <div class="form-group">
-        <label>Upload Payment Receipt <span class="req">*</span></label>
-        <div class="file-wrap" onclick="document.getElementById('receipt').click()">
-          <div class="upload-icon">📎</div>
-          <p id="file-label">Click to upload receipt (JPG, PNG or PDF)</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Amount Paid <span class="req">*</span></label>
+            <input type="text" id="f-amount" placeholder="e.g. &#8358;500,000 or &euro;500" required>
+          </div>
+          <div class="form-group">
+            <label>Payment Method <span class="req">*</span></label>
+            <select id="f-method" required>
+              <option value="">Select...</option>
+              <option>Naira Bank Transfer</option>
+              <option>Euro WISE Transfer</option>
+              <option>Stripe Card</option>
+            </select>
+          </div>
         </div>
-        <input type="file" id="receipt" name="receipt" class="file-hidden" accept="image/*,.pdf" required onchange="showFileName(this)">
-      </div>
-
-      <div class="form-group">
-        <label>Additional Notes</label>
-        <textarea name="notes" rows="3" placeholder="Anything else we should know..."></textarea>
-      </div>
-
-      <button type="submit" class="submit-btn" id="submit-btn">Submit Payment Confirmation</button>
-      <p class="terms-note">By submitting you confirm your payment and accept InstaGo's Terms and Conditions.</p>
-
-    </form>
+        <div class="form-group">
+          <label>Payment Date <span class="req">*</span></label>
+          <input type="date" id="f-date" required>
+        </div>
+        <div class="form-group">
+          <label>Upload Payment Receipt <span class="req">*</span></label>
+          <div class="file-wrap" id="file-wrap" onclick="document.getElementById('f-receipt').click()">
+            <span class="upload-icon">📎</span>
+            <p id="file-label">Click to upload receipt (JPG, PNG or PDF)</p>
+          </div>
+          <input type="file" id="f-receipt" style="display:none;" accept="image/jpeg,image/png,image/jpg,application/pdf">
+        </div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea id="f-notes" rows="3" placeholder="Anything else we should know..."></textarea>
+        </div>
+        <button type="button" id="submit-btn" class="submit-btn" onclick="submitForm()">Submit Payment Confirmation</button>
+        <p class="terms-note">By submitting you confirm your payment and accept InstaGo's Terms and Conditions.</p>
+      </form>
+    </div>
   </div>
 </div>
 
-</div><!-- /main-content -->
-
-<!-- SUCCESS -->
 <div class="success-screen" id="success-screen">
   <div class="success-icon">&#10003;</div>
   <h2>Payment Confirmation Received!</h2>
   <p>Thank you! We have received your confirmation and our team is verifying your payment now. You will hear from us within 1 to 2 hours.</p>
   <div class="success-contact">
     Questions? Reach us at<br>
-    <a href="/cdn-cgi/l/email-protection#c5acaba3aa85acabb6b1a4a2aaa0a1b1b7a4b3a0a9b6eba6aaa8"><span class="__cf_email__" data-cfemail="355c5b535a755c5b464154525a5051414754435059461b565a58">[email&#160;protected]</span></a><br>
+    <a href="/cdn-cgi/l/email-protection#7910171f163910170a0d181e161c1d0d0b180f1c150a571a1614"><span class="__cf_email__" data-cfemail="d1b8bfb7be91b8bfa2a5b0b6beb4b5a5a3b0a7b4bda2ffb2bebc">[email&#160;protected]</span></a><br>
     +372 53539474
   </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   <div class="footer-brand">Insta<span>Go</span></div>
   <p>
     <a href="https://instagoedtravels.com">instagoedtravels.com</a> &middot;
-    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066f686069466f687572676169636272746770636a752865696b">[email&#160;protected]</a> &middot; +372 53539474<br>
+    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630a0d050c230a0d101702040c060717110215060f104d000c0e">[email&#160;protected]</a> &middot; +372 53539474<br>
     Kadaka Tee 137, Tallinn, Estonia
   </p>
 </div>
 
-</div><!-- /page-wrap -->
+</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function doCopy(text, btnId, originalLabel) {
-  var btn = document.getElementById(btnId);
-  function showCopied() {
-    btn.textContent = '✓ Copied!';
-    btn.style.background = '#10b981';
-    setTimeout(function() {
-      btn.textContent = originalLabel;
-      btn.style.background = '';
-    }, 2500);
-  }
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(showCopied).catch(function() { fallback(text, showCopied); });
-  } else {
-    fallback(text, showCopied);
-  }
-}
+// ── COPY BUTTONS ──
+document.getElementById('btn1').addEventListener('click', function() {
+  copyIt('9160219459', this, 'Copy Account Number');
+});
+document.getElementById('btn2').addEventListener('click', function() {
+  copyIt('BE14967418217583', this, 'Copy IBAN');
+});
 
-function fallback(text, cb) {
+function copyIt(text, btn, label) {
   var ta = document.createElement('textarea');
   ta.value = text;
-  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  ta.style.top = '-9999px';
   document.body.appendChild(ta);
   ta.focus();
   ta.select();
-  try { document.execCommand('copy'); cb(); } catch(e) { alert('Please copy manually: ' + text); }
+  try {
+    document.execCommand('copy');
+    btn.textContent = '✓ Copied!';
+    btn.style.background = '#10b981';
+    setTimeout(function() {
+      btn.textContent = label;
+      btn.style.background = '#004aad';
+    }, 2500);
+  } catch(e) {
+    alert('Please copy manually: ' + text);
+  }
   document.body.removeChild(ta);
 }
 
-function showFileName(input) {
+// ── FILE UPLOAD ──
+document.getElementById('f-receipt').addEventListener('change', function() {
   var lbl = document.getElementById('file-label');
-  if (input.files && input.files[0]) {
-    lbl.textContent = '✓ ' + input.files[0].name;
+  var wrap = document.getElementById('file-wrap');
+  if (this.files && this.files[0]) {
+    lbl.textContent = '✓ ' + this.files[0].name;
     lbl.style.color = '#004aad';
     lbl.style.fontWeight = '700';
+    wrap.style.borderColor = '#004aad';
+    wrap.style.background = '#f0f5ff';
   }
-}
+});
 
-function
+// ── FORM SUBMIT ──
+function submitForm() {
+  var name    = document.getElementById('f-name').value.trim();
+  var email   = document.getElementById('f-email').value.trim();
+  var phone   = document.getElementById('f-phone').value.trim();
+  var service = document.getElementById('f-service').value;
+  var amount  = document.getElementById('f-amount').value.trim();
+  var method  = document.getElementById('f-method').value;
+  var date    = document.getElementById('f-date').value;
+
+  if (!name || !email || !phone || !service || !amount || !method || !date) {
+    alert('Please fill in all required fields before submitting.');
+    return;
+  }
+
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  var data = {
+    name:    name,
+    email:   email,
+    phone:   phone,
+    invoice: document.getElementById('f-invoice').value.trim(),
+    service: service,
+    amount:  amount,
+    method:  method,
+    date:    date,
+    notes:   document.getElementById('f-notes').value.trim()
+  };
+
+  fetch('https://script.google.com/macros/s/AKfycbytOsrbVabQJBYikIUN8oL5xjJ31qxczdWwWU38QrPHJ7U9v9hJEh4x2a2szFNOC_8/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(function() {
