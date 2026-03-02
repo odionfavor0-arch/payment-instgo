@@ -90,6 +90,9 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
 .submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
 .terms-note { font-size:12px; color:var(--text-light); text-align:center; margin-top:10px; line-height:1.6; }
 
+.error-msg { color:#e53e3e; font-size:12px; margin-top:4px; display:none; }
+.field-error { border-color:#e53e3e !important; }
+
 .success-screen { display:none; padding:48px 28px; text-align:center; }
 .success-icon { width:70px; height:70px; border-radius:50%; background:linear-gradient(135deg,#004aad,#ca6ce5); display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:36px; color:#fff; font-weight:900; }
 .success-screen h2 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:900; color:var(--text-dark); margin-bottom:12px; }
@@ -205,21 +208,21 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
     <div class="form-card">
       <p class="form-intro">After making your payment, fill in the details below and upload your receipt. Our team will verify and confirm within 1 to 2 hours.</p>
 
-      <form id="pay-form">
+      <form id="pay-form" onsubmit="return false;">
         <div class="form-row">
           <div class="form-group">
             <label>Full Name <span class="req">*</span></label>
-            <input type="text" id="f-name" placeholder="As on your passport" required>
+            <input type="text" id="f-name" placeholder="As on your passport">
           </div>
           <div class="form-group">
             <label>Email Address <span class="req">*</span></label>
-            <input type="email" id="f-email" placeholder="your@email.com" required>
+            <input type="email" id="f-email" placeholder="your@email.com">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Phone Number <span class="req">*</span></label>
-            <input type="tel" id="f-phone" placeholder="+234 000 0000 000" required>
+            <input type="tel" id="f-phone" placeholder="+234 000 0000 000">
           </div>
           <div class="form-group">
             <label>Invoice Number</label>
@@ -228,7 +231,7 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
         </div>
         <div class="form-group">
           <label>Service Type <span class="req">*</span></label>
-          <select id="f-service" required>
+          <select id="f-service">
             <option value="">Select service...</option>
             <optgroup label="Study Abroad">
               <option>Study in China</option>
@@ -257,11 +260,11 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
         <div class="form-row">
           <div class="form-group">
             <label>Amount Paid <span class="req">*</span></label>
-            <input type="text" id="f-amount" placeholder="e.g. &#8358;500,000 or &euro;500" required>
+            <input type="text" id="f-amount" placeholder="e.g. &#8358;500,000 or &euro;500">
           </div>
           <div class="form-group">
             <label>Payment Method <span class="req">*</span></label>
-            <select id="f-method" required>
+            <select id="f-method">
               <option value="">Select...</option>
               <option>Naira Bank Transfer</option>
               <option>Euro WISE Transfer</option>
@@ -271,7 +274,7 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
         </div>
         <div class="form-group">
           <label>Payment Date <span class="req">*</span></label>
-          <input type="date" id="f-date" required>
+          <input type="date" id="f-date">
         </div>
         <div class="form-group">
           <label>Upload Payment Receipt <span class="req">*</span></label>
@@ -292,13 +295,14 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
   </div>
 </div>
 
+<!-- ── SUCCESS SCREEN ── -->
 <div class="success-screen" id="success-screen">
   <div class="success-icon">&#10003;</div>
   <h2>Payment Confirmation Received!</h2>
   <p>Thank you! We have received your confirmation and our team is verifying your payment now. You will hear from us within 1 to 2 hours.</p>
   <div class="success-contact">
     Questions? Reach us at<br>
-    <a href="/cdn-cgi/l/email-protection#7910171f163910170a0d181e161c1d0d0b180f1c150a571a1614"><span class="__cf_email__" data-cfemail="d1b8bfb7be91b8bfa2a5b0b6beb4b5a5a3b0a7b4bda2ffb2bebc">[email&#160;protected]</span></a><br>
+    <a href="mailto:info@instagoedtravels.com">info@instagoedtravels.com</a><br>
     +372 53539474
   </div>
 </div>
@@ -307,14 +311,14 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
   <div class="footer-brand">Insta<span>Go</span></div>
   <p>
     <a href="https://instagoedtravels.com">instagoedtravels.com</a> &middot;
-    <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630a0d050c230a0d101702040c060717110215060f104d000c0e">[email&#160;protected]</a> &middot; +372 53539474<br>
+    info@instagoedtravels.com &middot; +372 53539474<br>
     Kadaka Tee 137, Tallinn, Estonia
   </p>
 </div>
 
-</div>
+</div><!-- /.page-wrap -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── COPY BUTTONS ──
 document.getElementById('btn1').addEventListener('click', function() {
   copyIt('9160219459', this, 'Copy Account Number');
@@ -324,26 +328,35 @@ document.getElementById('btn2').addEventListener('click', function() {
 });
 
 function copyIt(text, btn, label) {
-  var ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.position = 'fixed';
-  ta.style.left = '-9999px';
-  ta.style.top = '-9999px';
-  document.body.appendChild(ta);
-  ta.focus();
-  ta.select();
-  try {
-    document.execCommand('copy');
+  navigator.clipboard.writeText(text).then(function() {
     btn.textContent = '✓ Copied!';
     btn.style.background = '#10b981';
     setTimeout(function() {
       btn.textContent = label;
       btn.style.background = '#004aad';
     }, 2500);
-  } catch(e) {
-    alert('Please copy manually: ' + text);
-  }
-  document.body.removeChild(ta);
+  }).catch(function() {
+    // Fallback for older browsers
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      btn.textContent = '✓ Copied!';
+      btn.style.background = '#10b981';
+      setTimeout(function() {
+        btn.textContent = label;
+        btn.style.background = '#004aad';
+      }, 2500);
+    } catch(e) {
+      alert('Please copy manually: ' + text);
+    }
+    document.body.removeChild(ta);
+  });
 }
 
 // ── FILE UPLOAD ──
@@ -361,6 +374,7 @@ document.getElementById('f-receipt').addEventListener('change', function() {
 
 // ── FORM SUBMIT ──
 function submitForm() {
+  // Collect field values
   var name    = document.getElementById('f-name').value.trim();
   var email   = document.getElementById('f-email').value.trim();
   var phone   = document.getElementById('f-phone').value.trim();
@@ -368,31 +382,76 @@ function submitForm() {
   var amount  = document.getElementById('f-amount').value.trim();
   var method  = document.getElementById('f-method').value;
   var date    = document.getElementById('f-date').value;
+  var receipt = document.getElementById('f-receipt').files[0];
 
-  if (!name || !email || !phone || !service || !amount || !method || !date) {
-    alert('Please fill in all required fields before submitting.');
+  // ── FIX 1: Validate all required fields including receipt ──
+  var missing = [];
+  if (!name)    missing.push('Full Name');
+  if (!email)   missing.push('Email Address');
+  if (!phone)   missing.push('Phone Number');
+  if (!service) missing.push('Service Type');
+  if (!amount)  missing.push('Amount Paid');
+  if (!method)  missing.push('Payment Method');
+  if (!date)    missing.push('Payment Date');
+  if (!receipt) missing.push('Payment Receipt');
+
+  if (missing.length > 0) {
+    alert('Please fill in the following required fields:\n• ' + missing.join('\n• '));
     return;
   }
 
   var btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  btn.textContent = 'Submitting...';
+  btn.textContent = 'Submitting…';
 
-  var data = {
-    name:    name,
-    email:   email,
-    phone:   phone,
-    invoice: document.getElementById('f-invoice').value.trim(),
-    service: service,
-    amount:  amount,
-    method:  method,
-    date:    date,
-    notes:   document.getElementById('f-notes').value.trim()
+  // ── FIX 2: Use FileReader to read receipt as base64 and include it in the payload ──
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var data = {
+      name:        name,
+      email:       email,
+      phone:       phone,
+      invoice:     document.getElementById('f-invoice').value.trim(),
+      service:     service,
+      amount:      amount,
+      method:      method,
+      date:        date,
+      notes:       document.getElementById('f-notes').value.trim(),
+      receiptName: receipt.name,
+      receiptType: receipt.type,
+      receiptData: e.target.result  // base64-encoded file
+    };
+
+    // ── FIX 3: Complete the fetch with proper .then() / .catch() and show success screen ──
+    fetch('https://script.google.com/macros/s/AKfycbytOsrbVabQJBYikIUN8oL5xjJ31qxczdWwWU38QrPHJ7U9v9hJEh4x2a2szFNOC_8/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      // Show success screen and hide the main form
+      document.getElementById('main-content').style.display = 'none';
+      var success = document.getElementById('success-screen');
+      success.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(function(err) {
+      console.error('Submission error:', err);
+      alert('Something went wrong while submitting. Please try again or contact us directly at info@instagoedtravels.com');
+      btn.disabled = false;
+      btn.textContent = 'Submit Payment Confirmation';
+    });
   };
 
-  fetch('https://script.google.com/macros/s/AKfycbytOsrbVabQJBYikIUN8oL5xjJ31qxczdWwWU38QrPHJ7U9v9hJEh4x2a2szFNOC_8/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  }).then(function() {
+  reader.onerror = function() {
+    alert('Could not read the receipt file. Please try a different file.');
+    btn.disabled = false;
+    btn.textContent = 'Submit Payment Confirmation';
+  };
+
+  reader.readAsDataURL(receipt);
+}
+</script>
+</body>
+</html>
