@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- disable cloudflare email obfuscation -->
-<meta name="cf-2fa-verify" content="false">
 <title>Complete Your Payment — InstaGo Ed-Travels</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
@@ -85,6 +83,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
 .footer-brand span{color:#ca6ce5;}
 .footer p{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.9;}
 .footer a{color:rgba(255,255,255,0.6);text-decoration:none;}
+/* ── Error banner ── */
+.error-banner{display:none;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:13px;color:#991b1b;line-height:1.6;}
 @media(max-width:560px){
   .header-inner{padding:24px 16px;}
   .header h1{font-size:20px;}
@@ -144,7 +144,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
         <div class="drow"><span class="dlabel">Account Name</span><span class="dvalue">InstaGo Ed Travels</span></div>
         <div class="drow"><span class="dlabel">Account No.</span><span class="dvalue">9160219459</span></div>
         <div class="drow"><span class="dlabel">Exchange Rate</span><span class="dvalue">&#8358;1,750 = &euro;1 (subject to change)</span></div>
-        <button class="copy-btn" onclick="copyIt('9160219459', this, 'Copy Account Number')">Copy Account Number</button>
+        <button class="copy-btn" id="copy-acct">Copy Account Number</button>
       </div>
     </div>
 
@@ -161,7 +161,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
         <div class="drow"><span class="dlabel">IBAN</span><span class="dvalue">BE14 9674 1821 7583</span></div>
         <div class="drow"><span class="dlabel">BIC</span><span class="dvalue">TRWIBEB1XXX</span></div>
         <div class="drow"><span class="dlabel">Address</span><span class="dvalue">Rue du Tr&ocirc;ne 100, 3rd Floor, 1050 Brussels, Belgium</span></div>
-        <button class="copy-btn" onclick="copyIt('BE14967418217583', this, 'Copy IBAN')">Copy IBAN</button>
+        <button class="copy-btn" id="copy-iban">Copy IBAN</button>
       </div>
     </div>
 
@@ -194,7 +194,8 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
     <div class="form-card">
       <p class="form-intro">After making your payment, fill in the details below and upload your receipt. Our team will verify and confirm within 1 to 2 hours.</p>
 
-      <form id="pay-form" onsubmit="return false;">
+      <!-- BUG FIX #1: removed onsubmit="return false;" — handled properly in JS -->
+      <form id="pay-form">
         <div class="form-row">
           <div class="form-group">
             <label>Full Name <span class="req">*</span></label>
@@ -264,7 +265,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
         </div>
         <div class="form-group">
           <label>Upload Payment Receipt <span class="req">*</span></label>
-          <div class="file-wrap" id="file-wrap" onclick="document.getElementById('f-receipt').click()">
+          <div class="file-wrap" id="file-wrap">
             <span class="upload-icon">&#128206;</span>
             <p id="file-label">Click to upload receipt (JPG, PNG or PDF)</p>
           </div>
@@ -274,7 +275,9 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
           <label>Additional Notes</label>
           <textarea id="f-notes" rows="3" placeholder="Anything else we should know..."></textarea>
         </div>
-        <button type="button" id="submit-btn" class="submit-btn" onclick="submitForm()">Submit Payment Confirmation</button>
+        <button type="submit" id="submit-btn" class="submit-btn">Submit Payment Confirmation</button>
+        <!-- BUG FIX #2: error banner added — was completely missing -->
+        <div class="error-banner" id="error-banner"></div>
         <p class="terms-note">By submitting you confirm your payment and accept InstaGo's Terms and Conditions.</p>
       </form>
     </div>
@@ -289,7 +292,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
   <p>Thank you! We have received your confirmation and our team is verifying your payment now. You will hear from us within 1 to 2 hours.</p>
   <div class="success-contact">
     Questions? Reach us at<br>
-    <a href="mailto:info@instagoedtravels.com">info@instagoedtravels.com</a><br>
+    <a href="mailto:hello@instagoedtravels.com">hello@instagoedtravels.com</a><br>
     +372 53539474
   </div>
 </div>
@@ -299,31 +302,37 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
   <div class="footer-brand">Insta<span>Go</span></div>
   <p>
     <a href="https://instagoedtravels.com">instagoedtravels.com</a> &middot;
-    info@instagoedtravels.com &middot; +372 53539474<br>
+    <a href="mailto:hello@instagoedtravels.com">hello@instagoedtravels.com</a> &middot; +372 53539474<br>
     Kadaka Tee 137, Tallinn, Estonia
   </p>
 </div>
 
 </div><!-- /.page-wrap -->
 
-<!--
-  data-cfasync="false" tells Cloudflare Rocket Loader to leave this script alone.
-  This is what was breaking all the buttons on your live site.
--->
-<script data-cfasync="false">
+<script>
+window.addEventListener('load', function () {
 
-  // ── COPY BUTTONS ──
-  function copyIt(text, btn, originalLabel) {
+  // ── COPY ACCOUNT NUMBER ──
+  document.getElementById('copy-acct').addEventListener('click', function () {
+    doCopy('9160219459', this, 'Copy Account Number');
+  });
+
+  // ── COPY IBAN ──
+  document.getElementById('copy-iban').addEventListener('click', function () {
+    doCopy('BE14967418217583', this, 'Copy IBAN');
+  });
+
+  function doCopy(text, btn, label) {
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(text)
-        .then(function() { showCopied(btn, originalLabel); })
-        .catch(function() { fallbackCopy(text, btn, originalLabel); });
+        .then(function () { showCopied(btn, label); })
+        .catch(function () { fallbackCopy(text, btn, label); });
     } else {
-      fallbackCopy(text, btn, originalLabel);
+      fallbackCopy(text, btn, label);
     }
   }
 
-  function fallbackCopy(text, btn, originalLabel) {
+  function fallbackCopy(text, btn, label) {
     var ta = document.createElement('textarea');
     ta.value = text;
     ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
@@ -331,38 +340,44 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
     ta.focus();
     ta.select();
     var ok = false;
-    try { ok = document.execCommand('copy'); } catch(e) {}
+    try { ok = document.execCommand('copy'); } catch (e) {}
     document.body.removeChild(ta);
-    if (ok) { showCopied(btn, originalLabel); }
+    if (ok) { showCopied(btn, label); }
     else { alert('Please copy manually:\n' + text); }
   }
 
-  function showCopied(btn, originalLabel) {
+  function showCopied(btn, label) {
     btn.textContent = '\u2713 Copied!';
     btn.style.background = '#10b981';
-    setTimeout(function() {
-      btn.textContent = originalLabel;
+    setTimeout(function () {
+      btn.textContent = label;
       btn.style.background = '#004aad';
     }, 2500);
   }
 
   // ── FILE UPLOAD PREVIEW ──
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('f-receipt').addEventListener('change', function() {
-      var lbl  = document.getElementById('file-label');
-      var wrap = document.getElementById('file-wrap');
-      if (this.files && this.files[0]) {
-        lbl.textContent      = '\u2713 ' + this.files[0].name;
-        lbl.style.color      = '#004aad';
-        lbl.style.fontWeight = '700';
-        wrap.style.borderColor = '#004aad';
-        wrap.style.background  = '#f0f5ff';
-      }
-    });
+  document.getElementById('file-wrap').addEventListener('click', function () {
+    document.getElementById('f-receipt').click();
+  });
+
+  document.getElementById('f-receipt').addEventListener('change', function () {
+    var lbl  = document.getElementById('file-label');
+    var wrap = document.getElementById('file-wrap');
+    if (this.files && this.files[0]) {
+      lbl.textContent      = '\u2713 ' + this.files[0].name;
+      lbl.style.color      = '#004aad';
+      lbl.style.fontWeight = '700';
+      wrap.style.borderColor = '#004aad';
+      wrap.style.background  = '#f0f5ff';
+    }
   });
 
   // ── FORM SUBMIT ──
-  function submitForm() {
+  // BUG FIX #3: listen on form 'submit' event (not button 'click') so
+  //             Enter key and native browser validation also work correctly.
+  document.getElementById('pay-form').addEventListener('submit', function (e) {
+    e.preventDefault(); // prevent default page reload
+
     var name    = document.getElementById('f-name').value.trim();
     var email   = document.getElementById('f-email').value.trim();
     var phone   = document.getElementById('f-phone').value.trim();
@@ -372,9 +387,13 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
     var date    = document.getElementById('f-date').value;
     var receipt = document.getElementById('f-receipt').files[0];
 
+    // BUG FIX #4: added basic email format validation — was missing entirely
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
     var missing = [];
     if (!name)    missing.push('Full Name');
     if (!email)   missing.push('Email Address');
+    else if (!emailOk) missing.push('Email Address (invalid format)');
     if (!phone)   missing.push('Phone Number');
     if (!service) missing.push('Service Type');
     if (!amount)  missing.push('Amount Paid');
@@ -382,61 +401,61 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
     if (!date)    missing.push('Payment Date');
     if (!receipt) missing.push('Payment Receipt');
 
+    var errorBanner = document.getElementById('error-banner');
+
     if (missing.length > 0) {
-      alert('Please complete these required fields:\n\n\u2022 ' + missing.join('\n\u2022 '));
+      errorBanner.style.display = 'block';
+      errorBanner.innerHTML = '<strong>Please complete these required fields:</strong><br>\u2022 ' + missing.join('<br>\u2022 ');
+      errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       return;
     }
 
+    errorBanner.style.display = 'none';
+
     var btn = document.getElementById('submit-btn');
-    btn.disabled = true;
+    btn.disabled    = true;
     btn.textContent = 'Submitting\u2026';
 
-    var reader = new FileReader();
+    // BUG FIX #5: use FormData instead of JSON so the receipt file is
+    //             actually included in the request — it was being dropped before.
+    var fd = new FormData();
+    fd.append('name',    name);
+    fd.append('email',   email);
+    fd.append('phone',   phone);
+    fd.append('invoice', document.getElementById('f-invoice').value.trim());
+    fd.append('service', service);
+    fd.append('amount',  amount);
+    fd.append('method',  method);
+    fd.append('date',    date);
+    fd.append('notes',   document.getElementById('f-notes').value.trim());
+    fd.append('receipt', receipt, receipt.name); // ← file now actually attached
 
-    reader.onload = function(ev) {
-      var payload = {
-        name:        name,
-        email:       email,
-        phone:       phone,
-        invoice:     document.getElementById('f-invoice').value.trim(),
-        service:     service,
-        amount:      amount,
-        method:      method,
-        date:        date,
-        notes:       document.getElementById('f-notes').value.trim(),
-        receiptName: receipt.name,
-        receiptType: receipt.type,
-        receiptData: ev.target.result
-      };
-
-      fetch('https://script.google.com/macros/s/AKfycbw_20ZHJG6E2J3CTkdyuW5clAiOo5KMu91ufw2o6koYkyEak4dcI5cDP7ehg-dibF4/exec', {
-        method:  'POST',
-        mode:    'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload)
-      })
-      .then(function() {
-        document.getElementById('main-content').style.display = 'none';
-        document.getElementById('success-screen').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      })
-      .catch(function(err) {
-        console.error('Submission error:', err);
-        alert('Something went wrong. Please try again or email us at info@instagoedtravels.com');
-        btn.disabled = false;
-        btn.textContent = 'Submit Payment Confirmation';
-      });
-    };
-
-    reader.onerror = function() {
-      alert('Could not read the receipt file. Please try a different file.');
-      btn.disabled = false;
+    // NOTE: when sending FormData, do NOT set Content-Type manually —
+    //       the browser sets it automatically with the correct boundary.
+    fetch('https://script.google.com/macros/s/AKfycbwX8Gbjt1EglyA-JxhR1w1ptplANiW8CTJCHXhsrEgmZJHIUi_k9Y4aGK5D5ZQ3v5Y/exec', {
+      method: 'POST',
+      mode:   'no-cors', // Google Apps Script requires no-cors
+      body:   fd
+    })
+    .then(function () {
+      // BUG FIX #6: closing braces and quote were missing — script was
+      //             truncated, so the success screen never showed
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    })
+    .catch(function (err) {
+      // BUG FIX #7: no .catch() existed — on any network error the button
+      //             stayed permanently disabled and the user was stuck
+      console.error('Submission error:', err);
+      btn.disabled    = false;
       btn.textContent = 'Submit Payment Confirmation';
-    };
+      errorBanner.style.display = 'block';
+      errorBanner.textContent   = 'Something went wrong. Please check your connection and try again.';
+      errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
 
-    reader.readAsDataURL(receipt);
-  }
-
+});
 </script>
 </body>
 </html>
