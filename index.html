@@ -3,113 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- disable cloudflare email obfuscation -->
+<meta name="cf-2fa-verify" content="false">
 <title>Complete Your Payment — InstaGo Ed-Travels</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --blue: #004aad;
-  --blue-dark: #003380;
-  --blue-deep: #001f4d;
-  --purple: #ca6ce5;
-  --purple-dark: #a84ec7;
-  --success: #10b981;
-  --border: #e2e8f0;
-  --off-white: #f7f9ff;
-  --text-dark: #0a1628;
-  --text-mid: #4a5568;
-  --text-light: #718096;
+  --blue:#004aad; --blue-dark:#003380; --blue-deep:#001f4d;
+  --purple:#ca6ce5; --purple-dark:#a84ec7; --success:#10b981;
+  --border:#e2e8f0; --off-white:#f7f9ff;
+  --text-dark:#0a1628; --text-mid:#4a5568; --text-light:#718096;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Lato',sans-serif; background:var(--off-white); color:var(--text-dark); line-height:1.6; }
-.page-wrap { max-width:680px; margin:0 auto; background:#fff; min-height:100vh; box-shadow:0 0 60px rgba(0,74,173,0.12); }
-
-.header { background:linear-gradient(135deg,#001f4d 0%,#004aad 60%,#1a6dd4 100%); position:relative; overflow:hidden; }
-.header::before { content:''; position:absolute; top:-60px; right:-60px; width:220px; height:220px; border-radius:50%; background:#ca6ce5; opacity:0.15; }
-.header::after { content:''; position:absolute; bottom:-40px; left:-40px; width:160px; height:160px; border-radius:50%; background:#ca6ce5; opacity:0.1; }
-.header-inner { position:relative; z-index:2; padding:36px 28px 32px; text-align:center; }
-
-.logo-wrap { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:20px; }
-.logo-name { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:900; color:#fff; letter-spacing:-0.5px; line-height:1; }
-.logo-name span { color:#ca6ce5; }
-.logo-sub { font-size:9px; color:rgba(255,255,255,0.5); letter-spacing:2.5px; text-transform:uppercase; margin-top:3px; display:block; }
-.header h1 { font-family:'Montserrat',sans-serif; font-size:24px; font-weight:900; color:#fff; margin-bottom:8px; }
-.header p { font-size:14px; color:rgba(255,255,255,0.7); max-width:360px; margin:0 auto; }
-.step-pills { display:flex; justify-content:center; gap:10px; margin-top:20px; flex-wrap:wrap; }
-.step-pill { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:6px 16px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); }
-.step-pill.active { background:#ca6ce5; border-color:#ca6ce5; color:#fff; }
-.accent-rule { height:4px; background:linear-gradient(90deg,#004aad,#ca6ce5,#004aad); }
-
-.section { padding:28px; }
-.section + .section { border-top:1px solid var(--border); }
-.form-section { padding:28px; background:var(--off-white); }
-.section-label { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
-.step-badge { width:30px; height:30px; border-radius:50%; background:var(--blue); color:#fff; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.step-badge.purple { background:var(--purple); }
-.section-label h2 { font-family:'Montserrat',sans-serif; font-size:15px; font-weight:800; color:var(--text-dark); text-transform:uppercase; letter-spacing:0.5px; }
-
-.payment-card { border:1.5px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:14px; }
-.pcard-head { padding:13px 18px; display:flex; align-items:center; gap:10px; }
-.pcard-head.naira { background:linear-gradient(90deg,#001f4d,#004aad); }
-.pcard-head.euro  { background:linear-gradient(90deg,#1a3a6e,#2251aa); }
-.pcard-head.card  { background:linear-gradient(90deg,#5b21b6,#a84ec7); }
-.pcard-head h3 { font-family:'Montserrat',sans-serif; font-size:13px; font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:0.5px; }
-.flag { font-size:18px; }
-.pcard-body { padding:16px 18px; background:var(--off-white); }
-.drow { display:flex; align-items:flex-start; padding:6px 0; border-bottom:1px solid var(--border); font-size:14px; }
-.drow:last-of-type { border-bottom:none; }
-.dlabel { width:125px; flex-shrink:0; color:var(--text-light); font-size:13px; }
-.dvalue { color:var(--text-dark); font-weight:600; flex:1; }
-
-.copy-btn { display:inline-flex; align-items:center; gap:6px; background:#004aad; color:#fff; border:none; padding:9px 16px; border-radius:8px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; margin-top:12px; transition:background 0.2s; }
-.copy-btn:hover { background:#003380; }
-
-.or-divider { display:flex; align-items:center; gap:10px; margin:6px 0; color:var(--text-light); font-size:13px; font-weight:600; }
-.or-divider::before,.or-divider::after { content:''; flex:1; height:1px; background:var(--border); }
-
-.stripe-btn { display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#5b21b6,#ca6ce5); color:#fff; padding:14px 24px; border-radius:10px; text-decoration:none; font-family:'Montserrat',sans-serif; font-weight:800; font-size:14px; transition:opacity 0.2s; }
-.stripe-btn:hover { opacity:0.9; }
-.stripe-note { font-size:12px; color:var(--text-light); text-align:center; margin-top:8px; }
-.narration-note { background:#fff8e6; border-left:3px solid #f59e0b; border-radius:0 8px 8px 0; padding:12px 14px; font-size:13px; color:#92400e; margin-top:14px; line-height:1.6; }
-
-.form-card { background:#fff; border-radius:16px; padding:24px; box-shadow:0 2px 20px rgba(0,74,173,0.07); }
-.form-intro { font-size:14px; color:var(--text-mid); margin-bottom:22px; line-height:1.7; }
-.form-group { margin-bottom:18px; }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-label { display:block; margin-bottom:6px; font-weight:700; font-size:13px; color:var(--text-dark); }
-.req { color:#ca6ce5; }
-input,select,textarea { width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:8px; font-size:14px; font-family:'Lato',sans-serif; color:var(--text-dark); background:#fff; transition:border-color 0.2s,box-shadow 0.2s; -webkit-appearance:none; appearance:none; }
-input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; box-shadow:0 0 0 3px rgba(0,74,173,0.1); }
-
-.file-wrap { border:2px dashed var(--border); border-radius:8px; padding:20px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; background:#fff; }
-.file-wrap:hover { border-color:#004aad; background:#f0f5ff; }
-.upload-icon { font-size:28px; margin-bottom:6px; display:block; }
-.file-wrap p { font-size:13px; color:var(--text-light); margin:0; }
-
-.submit-btn { width:100%; background:linear-gradient(135deg,#a84ec7,#ca6ce5); color:#fff; border:none; padding:16px; border-radius:10px; font-family:'Montserrat',sans-serif; font-size:15px; font-weight:800; cursor:pointer; letter-spacing:0.5px; box-shadow:0 4px 20px rgba(202,108,229,0.4); transition:opacity 0.2s; margin-top:4px; }
-.submit-btn:hover { opacity:0.9; }
-.submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
-.terms-note { font-size:12px; color:var(--text-light); text-align:center; margin-top:10px; line-height:1.6; }
-
-.success-screen { display:none; padding:48px 28px; text-align:center; }
-.success-icon { width:70px; height:70px; border-radius:50%; background:linear-gradient(135deg,#004aad,#ca6ce5); display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-size:36px; color:#fff; font-weight:900; }
-.success-screen h2 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:900; color:var(--text-dark); margin-bottom:12px; }
-.success-screen p { font-size:15px; color:var(--text-mid); line-height:1.8; max-width:380px; margin:0 auto 20px; }
-.success-contact { background:var(--off-white); border-radius:12px; padding:18px 24px; font-size:14px; color:var(--text-mid); line-height:1.9; display:inline-block; }
-.success-contact a { color:#004aad; text-decoration:none; font-weight:700; }
-
-.footer { background:#001f4d; padding:22px 28px; text-align:center; }
-.footer-brand { font-family:'Montserrat',sans-serif; font-size:16px; font-weight:900; color:#fff; margin-bottom:6px; }
-.footer-brand span { color:#ca6ce5; }
-.footer p { font-size:12px; color:rgba(255,255,255,0.4); line-height:1.9; }
-.footer a { color:rgba(255,255,255,0.6); text-decoration:none; }
-
-@media(max-width:560px) {
-  .header-inner { padding:24px 16px; }
-  .header h1 { font-size:20px; }
-  .section,.form-section { padding:20px 14px; }
-  .form-card { padding:18px 14px; }
-  .form-row { grid-template-columns:1fr; }
-  .dlabel { width:100px; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--text-dark);line-height:1.6;}
+.page-wrap{max-width:680px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 60px rgba(0,74,173,0.12);}
+.header{background:linear-gradient(135deg,#001f4d 0%,#004aad 60%,#1a6dd4 100%);position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:#ca6ce5;opacity:0.15;}
+.header::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:#ca6ce5;opacity:0.1;}
+.header-inner{position:relative;z-index:2;padding:36px 28px 32px;text-align:center;}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;}
+.logo-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1;}
+.logo-name span{color:#ca6ce5;}
+.logo-sub{font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:2.5px;text-transform:uppercase;margin-top:3px;display:block;}
+.header h1{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:900;color:#fff;margin-bottom:8px;}
+.header p{font-size:14px;color:rgba(255,255,255,0.7);max-width:360px;margin:0 auto;}
+.step-pills{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.step-pill{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:6px 16px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);}
+.step-pill.active{background:#ca6ce5;border-color:#ca6ce5;color:#fff;}
+.accent-rule{height:4px;background:linear-gradient(90deg,#004aad,#ca6ce5,#004aad);}
+.section{padding:28px;}
+.section+.section{border-top:1px solid var(--border);}
+.form-section{padding:28px;background:var(--off-white);}
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.step-badge{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-badge.purple{background:var(--purple);}
+.section-label h2{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:var(--text-dark);text-transform:uppercase;letter-spacing:0.5px;}
+.payment-card{border:1.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px;}
+.pcard-head{padding:13px 18px;display:flex;align-items:center;gap:10px;}
+.pcard-head.naira{background:linear-gradient(90deg,#001f4d,#004aad);}
+.pcard-head.euro{background:linear-gradient(90deg,#1a3a6e,#2251aa);}
+.pcard-head.card{background:linear-gradient(90deg,#5b21b6,#a84ec7);}
+.pcard-head h3{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.5px;}
+.flag{font-size:18px;}
+.pcard-body{padding:16px 18px;background:var(--off-white);}
+.drow{display:flex;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.drow:last-of-type{border-bottom:none;}
+.dlabel{width:125px;flex-shrink:0;color:var(--text-light);font-size:13px;}
+.dvalue{color:var(--text-dark);font-weight:600;flex:1;}
+.copy-btn{display:inline-flex;align-items:center;gap:6px;background:#004aad;color:#fff;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;margin-top:12px;transition:background 0.2s;}
+.copy-btn:hover{background:#003380;}
+.or-divider{display:flex;align-items:center;gap:10px;margin:6px 0;color:var(--text-light);font-size:13px;font-weight:600;}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.stripe-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#5b21b6,#ca6ce5);color:#fff;padding:14px 24px;border-radius:10px;text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;transition:opacity 0.2s;}
+.stripe-btn:hover{opacity:0.9;}
+.stripe-note{font-size:12px;color:var(--text-light);text-align:center;margin-top:8px;}
+.narration-note{background:#fff8e6;border-left:3px solid #f59e0b;border-radius:0 8px 8px 0;padding:12px 14px;font-size:13px;color:#92400e;margin-top:14px;line-height:1.6;}
+.form-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 20px rgba(0,74,173,0.07);}
+.form-intro{font-size:14px;color:var(--text-mid);margin-bottom:22px;line-height:1.7;}
+.form-group{margin-bottom:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+label{display:block;margin-bottom:6px;font-weight:700;font-size:13px;color:var(--text-dark);}
+.req{color:#ca6ce5;}
+input,select,textarea{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;color:var(--text-dark);background:#fff;transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;appearance:none;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-shadow:0 0 0 3px rgba(0,74,173,0.1);}
+.file-wrap{border:2px dashed var(--border);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s;background:#fff;}
+.file-wrap:hover{border-color:#004aad;background:#f0f5ff;}
+.upload-icon{font-size:28px;margin-bottom:6px;display:block;}
+.file-wrap p{font-size:13px;color:var(--text-light);margin:0;}
+.submit-btn{width:100%;background:linear-gradient(135deg,#a84ec7,#ca6ce5);color:#fff;border:none;padding:16px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 20px rgba(202,108,229,0.4);transition:opacity 0.2s;margin-top:4px;}
+.submit-btn:hover{opacity:0.9;}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.terms-note{font-size:12px;color:var(--text-light);text-align:center;margin-top:10px;line-height:1.6;}
+.success-screen{display:none;padding:48px 28px;text-align:center;}
+.success-icon{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#004aad,#ca6ce5);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:36px;color:#fff;font-weight:900;}
+.success-screen h2{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--text-dark);margin-bottom:12px;}
+.success-screen p{font-size:15px;color:var(--text-mid);line-height:1.8;max-width:380px;margin:0 auto 20px;}
+.success-contact{background:var(--off-white);border-radius:12px;padding:18px 24px;font-size:14px;color:var(--text-mid);line-height:1.9;display:inline-block;}
+.success-contact a{color:#004aad;text-decoration:none;font-weight:700;}
+.footer{background:#001f4d;padding:22px 28px;text-align:center;}
+.footer-brand{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:#fff;margin-bottom:6px;}
+.footer-brand span{color:#ca6ce5;}
+.footer p{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.9;}
+.footer a{color:rgba(255,255,255,0.6);text-decoration:none;}
+@media(max-width:560px){
+  .header-inner{padding:24px 16px;}
+  .header h1{font-size:20px;}
+  .section,.form-section{padding:20px 14px;}
+  .form-card{padding:18px 14px;}
+  .form-row{grid-template-columns:1fr;}
+  .dlabel{width:100px;}
 }
 </style>
 </head>
@@ -213,7 +195,6 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
       <p class="form-intro">After making your payment, fill in the details below and upload your receipt. Our team will verify and confirm within 1 to 2 hours.</p>
 
       <form id="pay-form" onsubmit="return false;">
-
         <div class="form-row">
           <div class="form-group">
             <label>Full Name <span class="req">*</span></label>
@@ -224,7 +205,6 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
             <input type="email" id="f-email" placeholder="your@email.com">
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label>Phone Number <span class="req">*</span></label>
@@ -235,7 +215,6 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
             <input type="text" id="f-invoice" placeholder="e.g. INS-2607007">
           </div>
         </div>
-
         <div class="form-group">
           <label>Service Type <span class="req">*</span></label>
           <select id="f-service">
@@ -264,7 +243,6 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
             </optgroup>
           </select>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label>Amount Paid <span class="req">*</span></label>
@@ -280,12 +258,10 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
             </select>
           </div>
         </div>
-
         <div class="form-group">
           <label>Payment Date <span class="req">*</span></label>
           <input type="date" id="f-date">
         </div>
-
         <div class="form-group">
           <label>Upload Payment Receipt <span class="req">*</span></label>
           <div class="file-wrap" id="file-wrap" onclick="document.getElementById('f-receipt').click()">
@@ -294,15 +270,12 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
           </div>
           <input type="file" id="f-receipt" style="display:none;" accept="image/jpeg,image/png,image/jpg,application/pdf">
         </div>
-
         <div class="form-group">
           <label>Additional Notes</label>
           <textarea id="f-notes" rows="3" placeholder="Anything else we should know..."></textarea>
         </div>
-
         <button type="button" id="submit-btn" class="submit-btn" onclick="submitForm()">Submit Payment Confirmation</button>
         <p class="terms-note">By submitting you confirm your payment and accept InstaGo's Terms and Conditions.</p>
-
       </form>
     </div>
   </div>
@@ -333,141 +306,137 @@ input:focus,select:focus,textarea:focus { outline:none; border-color:#004aad; bo
 
 </div><!-- /.page-wrap -->
 
-<script>
-// ══════════════════════════════════════════
-//  COPY BUTTONS — works on HTTP and HTTPS
-// ══════════════════════════════════════════
-function copyIt(text, btn, originalLabel) {
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text)
-      .then(function() { showCopied(btn, originalLabel); })
-      .catch(function() { fallbackCopy(text, btn, originalLabel); });
-  } else {
-    fallbackCopy(text, btn, originalLabel);
-  }
-}
+<!--
+  data-cfasync="false" tells Cloudflare Rocket Loader to leave this script alone.
+  This is what was breaking all the buttons on your live site.
+-->
+<script data-cfasync="false">
 
-function fallbackCopy(text, btn, originalLabel) {
-  var ta = document.createElement('textarea');
-  ta.value = text;
-  ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
-  document.body.appendChild(ta);
-  ta.focus();
-  ta.select();
-  var success = false;
-  try { success = document.execCommand('copy'); } catch(e) {}
-  document.body.removeChild(ta);
-  if (success) {
-    showCopied(btn, originalLabel);
-  } else {
-    alert('Please copy manually:\n' + text);
-  }
-}
-
-function showCopied(btn, originalLabel) {
-  btn.textContent = '\u2713 Copied!';
-  btn.style.background = '#10b981';
-  setTimeout(function() {
-    btn.textContent = originalLabel;
-    btn.style.background = '#004aad';
-  }, 2500);
-}
-
-// ══════════════════════════════════════════
-//  FILE UPLOAD PREVIEW
-// ══════════════════════════════════════════
-document.getElementById('f-receipt').addEventListener('change', function() {
-  var lbl  = document.getElementById('file-label');
-  var wrap = document.getElementById('file-wrap');
-  if (this.files && this.files[0]) {
-    lbl.textContent    = '\u2713 ' + this.files[0].name;
-    lbl.style.color    = '#004aad';
-    lbl.style.fontWeight = '700';
-    wrap.style.borderColor = '#004aad';
-    wrap.style.background  = '#f0f5ff';
-  }
-});
-
-// ══════════════════════════════════════════
-//  FORM SUBMIT
-// ══════════════════════════════════════════
-function submitForm() {
-  var name    = document.getElementById('f-name').value.trim();
-  var email   = document.getElementById('f-email').value.trim();
-  var phone   = document.getElementById('f-phone').value.trim();
-  var service = document.getElementById('f-service').value;
-  var amount  = document.getElementById('f-amount').value.trim();
-  var method  = document.getElementById('f-method').value;
-  var date    = document.getElementById('f-date').value;
-  var receipt = document.getElementById('f-receipt').files[0];
-
-  // Validate
-  var missing = [];
-  if (!name)    missing.push('Full Name');
-  if (!email)   missing.push('Email Address');
-  if (!phone)   missing.push('Phone Number');
-  if (!service) missing.push('Service Type');
-  if (!amount)  missing.push('Amount Paid');
-  if (!method)  missing.push('Payment Method');
-  if (!date)    missing.push('Payment Date');
-  if (!receipt) missing.push('Payment Receipt');
-
-  if (missing.length > 0) {
-    alert('Please complete these required fields:\n\n\u2022 ' + missing.join('\n\u2022 '));
-    return;
+  // ── COPY BUTTONS ──
+  function copyIt(text, btn, originalLabel) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text)
+        .then(function() { showCopied(btn, originalLabel); })
+        .catch(function() { fallbackCopy(text, btn, originalLabel); });
+    } else {
+      fallbackCopy(text, btn, originalLabel);
+    }
   }
 
-  var btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Submitting\u2026';
+  function fallbackCopy(text, btn, originalLabel) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    if (ok) { showCopied(btn, originalLabel); }
+    else { alert('Please copy manually:\n' + text); }
+  }
 
-  // Read receipt as base64 then send
-  var reader = new FileReader();
+  function showCopied(btn, originalLabel) {
+    btn.textContent = '\u2713 Copied!';
+    btn.style.background = '#10b981';
+    setTimeout(function() {
+      btn.textContent = originalLabel;
+      btn.style.background = '#004aad';
+    }, 2500);
+  }
 
-  reader.onload = function(ev) {
-    var payload = {
-      name:        name,
-      email:       email,
-      phone:       phone,
-      invoice:     document.getElementById('f-invoice').value.trim(),
-      service:     service,
-      amount:      amount,
-      method:      method,
-      date:        date,
-      notes:       document.getElementById('f-notes').value.trim(),
-      receiptName: receipt.name,
-      receiptType: receipt.type,
-      receiptData: ev.target.result
+  // ── FILE UPLOAD PREVIEW ──
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('f-receipt').addEventListener('change', function() {
+      var lbl  = document.getElementById('file-label');
+      var wrap = document.getElementById('file-wrap');
+      if (this.files && this.files[0]) {
+        lbl.textContent      = '\u2713 ' + this.files[0].name;
+        lbl.style.color      = '#004aad';
+        lbl.style.fontWeight = '700';
+        wrap.style.borderColor = '#004aad';
+        wrap.style.background  = '#f0f5ff';
+      }
+    });
+  });
+
+  // ── FORM SUBMIT ──
+  function submitForm() {
+    var name    = document.getElementById('f-name').value.trim();
+    var email   = document.getElementById('f-email').value.trim();
+    var phone   = document.getElementById('f-phone').value.trim();
+    var service = document.getElementById('f-service').value;
+    var amount  = document.getElementById('f-amount').value.trim();
+    var method  = document.getElementById('f-method').value;
+    var date    = document.getElementById('f-date').value;
+    var receipt = document.getElementById('f-receipt').files[0];
+
+    var missing = [];
+    if (!name)    missing.push('Full Name');
+    if (!email)   missing.push('Email Address');
+    if (!phone)   missing.push('Phone Number');
+    if (!service) missing.push('Service Type');
+    if (!amount)  missing.push('Amount Paid');
+    if (!method)  missing.push('Payment Method');
+    if (!date)    missing.push('Payment Date');
+    if (!receipt) missing.push('Payment Receipt');
+
+    if (missing.length > 0) {
+      alert('Please complete these required fields:\n\n\u2022 ' + missing.join('\n\u2022 '));
+      return;
+    }
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting\u2026';
+
+    var reader = new FileReader();
+
+    reader.onload = function(ev) {
+      var payload = {
+        name:        name,
+        email:       email,
+        phone:       phone,
+        invoice:     document.getElementById('f-invoice').value.trim(),
+        service:     service,
+        amount:      amount,
+        method:      method,
+        date:        date,
+        notes:       document.getElementById('f-notes').value.trim(),
+        receiptName: receipt.name,
+        receiptType: receipt.type,
+        receiptData: ev.target.result
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbw_20ZHJG6E2J3CTkdyuW5clAiOo5KMu91ufw2o6koYkyEak4dcI5cDP7ehg-dibF4/exec', {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      })
+      .then(function() {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function(err) {
+        console.error('Submission error:', err);
+        alert('Something went wrong. Please try again or email us at info@instagoedtravels.com');
+        btn.disabled = false;
+        btn.textContent = 'Submit Payment Confirmation';
+      });
     };
 
-    fetch('https://script.google.com/macros/s/AKfycbxZvI1D3wp5_vxAMSr3KBXTV-Pr59JnCZeZ3amQrfVAM2XyHTC1E7C51__Z4IK50Yc/exec', {
-      method:  'POST',
-      mode:    'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
-    })
-    .then(function() {
-      document.getElementById('main-content').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    })
-    .catch(function(err) {
-      console.error('Submission error:', err);
-      alert('Something went wrong. Please try again or email us at info@instagoedtravels.com');
+    reader.onerror = function() {
+      alert('Could not read the receipt file. Please try a different file.');
       btn.disabled = false;
       btn.textContent = 'Submit Payment Confirmation';
-    });
-  };
+    };
 
-  reader.onerror = function() {
-    alert('Could not read the receipt file. Please try a different file.');
-    btn.disabled = false;
-    btn.textContent = 'Submit Payment Confirmation';
-  };
+    reader.readAsDataURL(receipt);
+  }
 
-  reader.readAsDataURL(receipt);
-}
 </script>
-
 </body>
 </html>
