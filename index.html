@@ -18,14 +18,14 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--text-
 .header{background:linear-gradient(135deg,#001f4d 0%,#004aad 60%,#1a6dd4 100%);position:relative;overflow:hidden;}
 .header::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:#ca6ce5;opacity:0.15;}
 .header::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:#ca6ce5;opacity:0.1;}
-.header-inner{position:relative;z-index:2;padding:36px 28px 32px;text-align:center;}
-.logo-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;}
+.header-inner{position:relative;z-index:2;padding:18px 28px 16px;text-align:center;}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;}
 .logo-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1;}
 .logo-name span{color:#ca6ce5;}
 .logo-sub{font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:2.5px;text-transform:uppercase;margin-top:3px;display:block;}
 .header h1{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:900;color:#fff;margin-bottom:8px;}
 .header p{font-size:14px;color:rgba(255,255,255,0.7);max-width:360px;margin:0 auto;}
-.step-pills{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.step-pills{display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap;}
 .step-pill{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:6px 16px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);}
 .step-pill.active{background:#ca6ce5;border-color:#ca6ce5;color:#fff;}
 .accent-rule{height:4px;background:linear-gradient(90deg,#004aad,#ca6ce5,#004aad);}
@@ -292,7 +292,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
   <p>Thank you! We have received your confirmation and our team is verifying your payment now. You will hear from us within 1 to 2 hours.</p>
   <div class="success-contact">
     Questions? Reach us at<br>
-    <a href="mailto:hello@instagoedtravels.com">hello@instagoedtravels.com</a><br>
+    <a href="/cdn-cgi/l/email-protection#acc4c9c0c0c3ecc5c2dfd8cdcbc3c9c8d8decddac9c0df82cfc3c1"><span class="__cf_email__" data-cfemail="adc5c8c1c1c2edc4c3ded9cccac2c8c9d9dfccdbc8c1de83cec2c0">[email&#160;protected]</span></a><br>
     +372 53539474
   </div>
 </div>
@@ -302,14 +302,14 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:#004aad;box-sh
   <div class="footer-brand">Insta<span>Go</span></div>
   <p>
     <a href="https://instagoedtravels.com">instagoedtravels.com</a> &middot;
-    <a href="mailto:hello@instagoedtravels.com">hello@instagoedtravels.com</a> &middot; +372 53539474<br>
+    <a href="/cdn-cgi/l/email-protection#7f171a1313103f16110c0b1e18101a1b0b0d1e091a130c511c1012"><span class="__cf_email__" data-cfemail="eb838e878784ab8285989f8a8c848e8f9f998a9d8e8798c5888486">[email&#160;protected]</span></a> &middot; +372 53539474<br>
     Kadaka Tee 137, Tallinn, Estonia
   </p>
 </div>
 
 </div><!-- /.page-wrap -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 window.addEventListener('load', function () {
 
   // ── COPY ACCOUNT NUMBER ──
@@ -416,46 +416,51 @@ window.addEventListener('load', function () {
     btn.disabled    = true;
     btn.textContent = 'Submitting\u2026';
 
-    // BUG FIX #5: use FormData instead of JSON so the receipt file is
-    //             actually included in the request — it was being dropped before.
-    var fd = new FormData();
-    fd.append('name',    name);
-    fd.append('email',   email);
-    fd.append('phone',   phone);
-    fd.append('invoice', document.getElementById('f-invoice').value.trim());
-    fd.append('service', service);
-    fd.append('amount',  amount);
-    fd.append('method',  method);
-    fd.append('date',    date);
-    fd.append('notes',   document.getElementById('f-notes').value.trim());
-    fd.append('receipt', receipt, receipt.name); // ← file now actually attached
+    // Read receipt as base64 so it can be sent as JSON
+    // (FormData + no-cors is unreliable with Google Apps Script — JSON is the fix)
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      // Strip the "data:...;base64," prefix, keep only the raw base64 string
+      var base64 = ev.target.result.split(',')[1];
 
-    // NOTE: when sending FormData, do NOT set Content-Type manually —
-    //       the browser sets it automatically with the correct boundary.
-    fetch('https://script.google.com/macros/s/AKfycbwX8Gbjt1EglyA-JxhR1w1ptplANiW8CTJCHXhsrEgmZJHIUi_k9Y4aGK5D5ZQ3v5Y/exec', {
-      method: 'POST',
-      mode:   'no-cors', // Google Apps Script requires no-cors
-      body:   fd
-    })
-    .then(function () {
-      // BUG FIX #6: closing braces and quote were missing — script was
-      //             truncated, so the success screen never showed
-      document.getElementById('main-content').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-    })
-    .catch(function (err) {
-      // BUG FIX #7: no .catch() existed — on any network error the button
-      //             stayed permanently disabled and the user was stuck
-      console.error('Submission error:', err);
-      btn.disabled    = false;
-      btn.textContent = 'Submit Payment Confirmation';
-      errorBanner.style.display = 'block';
-      errorBanner.textContent   = 'Something went wrong. Please check your connection and try again.';
-      errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
-  });
+      var payload = {
+        name:        name,
+        email:       email,
+        phone:       phone,
+        invoice:     document.getElementById('f-invoice').value.trim(),
+        service:     service,
+        amount:      amount,
+        method:      method,
+        date:        date,
+        notes:       document.getElementById('f-notes').value.trim(),
+        receiptName: receipt.name,
+        receiptType: receipt.type,
+        receiptData: base64
+      };
 
-});
+      fetch('https://script.google.com/macros/s/AKfycbwmLOcL8gTcBtMxyQU3AYYpeIZlMK-U21QotoswjawiXC0oacXnaFaKD85-usxR2Bo/exec', {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      })
+      .then(function () {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+      })
+      .catch(function (err) {
+        console.error('Submission error:', err);
+        btn.disabled    = false;
+        btn.textContent = 'Submit Payment Confirmation';
+        errorBanner.style.display = 'block';
+        errorBanner.textContent   = 'Something went wrong. Please check your connection and try again.';
+        errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }; // end FileReader.onload
+    reader.readAsDataURL(receipt);
+  }); // end form submit
+
+}); // end window load
 </script>
 </body>
 </html>
